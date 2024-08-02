@@ -3,8 +3,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import BookReference from './BookReference'
+import Comment from './Comment'
 
 export default function Post({ post, isDetailView = false }) {
   const [expanded, setExpanded] = useState(false)
@@ -23,10 +23,13 @@ export default function Post({ post, isDetailView = false }) {
 
   return (
     <div className="post bg-white shadow-md rounded-lg p-6 mb-4">
-      <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-      <p className="text-gray-600 mb-4">{post.authorName}</p>
+      <h2 className="text-xl font-bold mb-2">{post.title}</h2>
+      <div className="flex items-center mb-2">
+        <h3 className="text-base font-semibold mr-2">{post.authorName}</h3>
+        <span className="text-sm text-gray-500">{post.createdAt}</span>
+      </div>
       <div 
-        className={`content cursor-pointer ${expanded || isDetailView ? 'expanded' : ''}`}
+        className={`content ${expanded || isDetailView ? 'expanded' : ''}`}
         onClick={handleContentClick}
       >
         {isDetailView || expanded ? (
@@ -51,15 +54,22 @@ export default function Post({ post, isDetailView = false }) {
           </button>
         )}
         {!isDetailView && (
-          <Link 
-            href={`/posts/${post.id}`} 
+          <button 
+            onClick={() => router.push(`/posts/${post.id}`)}
             className="text-blue-500 hover:text-blue-700 ml-auto"
-            onClick={(e) => e.stopPropagation()}
           >
             상세보기
-          </Link>
+          </button>
         )}
       </div>
+      {isDetailView && (
+        <div className="mt-4">
+          <h4 className="text-lg font-semibold mb-2">댓글</h4>
+          {post.comments.map(comment => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
