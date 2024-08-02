@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import BookReference from './BookReference'
 import Comment from './Comment'
+import { formatDistanceToNow, format } from 'date-fns'
 
 export default function Post({ post, isDetailView = false }) {
   const [expanded, setExpanded] = useState(false)
@@ -21,12 +22,38 @@ export default function Post({ post, isDetailView = false }) {
     }
   }
 
+  const formatCreatedAt = (createdAt, isDetailView) => {
+    const date = new Date(createdAt);
+    
+    if (isDetailView) {
+      return {
+        displayTime: format(date, 'yyyy-MM-dd HH:mm'),
+        exactTime: format(date, 'yyyy-MM-dd HH:mm:ss')
+      };
+    } else {
+      return {
+        displayTime: formatDistanceToNow(date, { addSuffix: true }),
+        exactTime: format(date, 'yyyy-MM-dd HH:mm:ss')
+      };
+    }
+  };
+
   return (
     <div className="post bg-white shadow-md rounded-lg p-6 mb-4">
       <h2 className="text-xl font-bold mb-2">{post.title}</h2>
       <div className="flex items-center mb-2">
         <h3 className="text-base font-semibold mr-2">{post.authorName}</h3>
-        <span className="text-sm text-gray-500">{post.createdAt}</span>
+        {(() => {
+          const { displayTime, exactTime } = formatCreatedAt(post.createdAt, isDetailView);
+          return (
+            <span 
+              className="text-sm text-gray-500" 
+              title={exactTime}
+            >
+              {displayTime}
+            </span>
+          );
+        })()}
       </div>
       <div 
         className={`content ${expanded || isDetailView ? 'expanded' : ''}`}
