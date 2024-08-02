@@ -10,16 +10,21 @@ export default function Header() {
         </Link>
         <ul className="flex space-x-4">
           <li>
-            <Link href="/" className="hover:underline">
-              홈
-            </Link>
-          </li>
-          <li>
             <Link href="/search" className="hover:underline">
               검색
             </Link>
+          </li>          
+          <li>
+            <Link href="/login" className="hover:underline">
+              로그인
+            </Link>
           </li>
           <li>
+            <Link href="/signup" className="hover:underline">
+              회원가입
+            </Link>
+          </li><
+            li>
             <Link href="/settings" className="hover:underline">
               설정
             </Link>
