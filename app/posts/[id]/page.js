@@ -18,7 +18,7 @@ export default async function PostPage({ params }) {
     <main className="container mx-auto px-4">
       <h1 className="text-3xl font-bold my-4">게시글 상세</h1>
       <Suspense fallback={<div>로딩 중...</div>}>
-        <Post post={post} />
+        <Post post={post} isDetailView={true} />
       </Suspense>
     </main>
   );
