@@ -27,13 +27,13 @@ export default function Post({ post, isDetailView = false }) {
     
     if (isDetailView) {
       return {
-        displayTime: format(date, 'yyyy-MM-dd HH:mm'),
-        exactTime: format(date, 'yyyy-MM-dd HH:mm:ss')
+        displayTime: format(date, 'yyyy. M. d. H시 m분'),
+        exactTime: format(date, 'yyyy. M. d. HH:mm:ss')
       };
     } else {
       return {
         displayTime: formatDistanceToNow(date, { addSuffix: true }),
-        exactTime: format(date, 'yyyy-MM-dd HH:mm:ss')
+        exactTime: format(date, 'yyyy. M. d. HH:mm:ss')
       };
     }
   };
