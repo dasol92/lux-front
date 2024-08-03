@@ -39,10 +39,7 @@ export default function Post({ post }) {
           )
         })()}
       </div>
-      <div 
-        className={`content ${expanded ? 'expanded' : ''}`}
-        onClick={() => setExpanded(!expanded)}
-      >
+      <div className={`content ${expanded ? 'expanded' : ''}`} >
         {expanded ? (
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         ) : (
@@ -52,7 +49,19 @@ export default function Post({ post }) {
       {expanded && (
         <BookReference references={post.references} />
       )}
-      <div className="mt-4 flex justify-between items-center">
+      <div className="mt-2 flex justify-between items-center">
+        {/* 더 보기 or 간단히 보기 */}
+        {expanded && (
+          <button 
+            onClick={(e) => {
+              e.stopPropagation()
+              setExpanded(false)
+            }}
+            className="text-blue-500 hover:text-blue-700"
+          >
+            간단히 보기
+          </button>
+        )}
         {!expanded && (
           <button 
             onClick={(e) => {
