@@ -1,3 +1,5 @@
+// app/components/RichTextEditor.js
+
 'use client'
 
 import { useState } from 'react'
