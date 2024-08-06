@@ -7,7 +7,8 @@ import BookReference from './BookReference'
 import Comment from './Comment'
 import RichTextEditor from './RichTextEditor'
 
-export default function Post({ post }) {
+export default function Post({ post: initialPost }) {
+  const [post, setPost] = useState(initialPost)
   const [expanded, setExpanded] = useState(false)
   const [commentContent, setCommentContent] = useState('')
   const maxLength = 100 // Maximum length for truncated content
@@ -44,10 +45,13 @@ export default function Post({ post }) {
     })
 
     if (response.ok) {
-      // Optionally refresh the comments or show a success message
-      alert('댓글 작성 완료!')
+      const newComment = await response.json()
+      setPost(prevPost => ({
+        ...prevPost,
+        comments: [...prevPost.comments, newComment],
+      }))
       setCommentContent('') // Clear the comment field
-      // You might want to reload comments here or update the state
+      alert('댓글 작성 완료!')
     } else {
       alert('댓글 작성에 실패했습니다.')
     }
