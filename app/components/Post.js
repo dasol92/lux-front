@@ -58,15 +58,15 @@ export default function Post({ post: initialPost }) {
   }
 
   return (
-    <div className="post bg-white shadow-md rounded-lg p-6 mb-4">
-      <h2 className="text-xl font-bold mb-2">{post.title}</h2>
+    <div className="post bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-4">
+      <h2 className="text-xl font-bold mb-2 dark:text-white">{post.title}</h2>
       <div className="flex items-center mb-2">
-        <h3 className="text-base font-semibold mr-2">{post.authorName}</h3>
+        <h3 className="text-base font-semibold mr-2 dark:text-gray-200">{post.authorName}</h3>
         {(() => {
           const { displayTime, exactTime } = formatCreatedAt(post.createdAt)
           return (
             <span 
-              className="text-sm text-gray-500" 
+              className="text-sm text-gray-500 dark:text-gray-400" 
               title={exactTime}
             >
               {displayTime}
@@ -75,7 +75,7 @@ export default function Post({ post: initialPost }) {
         })()}
       </div>
       <div 
-        className={`content ${expanded ? 'expanded' : ''}`}
+        className={`content dark:text-gray-300 ${expanded ? 'expanded' : ''}`}
         onClick={handleToggleExpand} // Toggle expanded state on click
       >
         {expanded ? (
@@ -96,7 +96,7 @@ export default function Post({ post: initialPost }) {
               e.stopPropagation()
               handleToggleExpand()
             }}
-            className="text-blue-500 hover:text-blue-700"
+            className="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
           >
             더 보기
           </button>
@@ -128,7 +128,7 @@ export default function Post({ post: initialPost }) {
             value={commentContent}
             onChange={setCommentContent}
           />
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-2">
+          <button type="submit" className="bg-blue-500 dark:bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-700 mt-2">
             댓글 작성
           </button>
         </form>

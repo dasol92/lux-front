@@ -1,9 +1,8 @@
-// app/components/Header.js
 import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="bg-blue-500 text-white p-4">
+    <header className="bg-blue-500 dark:bg-blue-800 text-white p-4">
       <nav className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold">
           LUX
@@ -23,8 +22,8 @@ export default function Header() {
             <Link href="/signup" className="hover:underline">
               회원가입
             </Link>
-          </li><
-            li>
+          </li>
+          <li>
             <Link href="/settings" className="hover:underline">
               설정
             </Link>
