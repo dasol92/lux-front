@@ -33,7 +33,7 @@ export default function Post({ post: initialPost }) {
     e.preventDefault()
 
     // Send the new comment to the backend
-    const response = await fetch(`http://localhost:8080/api/comments/new/${post.id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/new/${post.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

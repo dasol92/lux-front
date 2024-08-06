@@ -8,7 +8,7 @@ import PostList from './components/PostList';
 import Pagination from './components/Pagination';
 
 async function fetchPosts(page = 0, size = 5) {
-  const res = await fetch(`http://localhost:8080/api/posts?page=${page}&size=${size}`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?page=${page}&size=${size}`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error('Failed to fetch posts');
   }

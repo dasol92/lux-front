@@ -13,7 +13,7 @@ export default function NewPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const response = await fetch('http://localhost:8080/api/posts', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

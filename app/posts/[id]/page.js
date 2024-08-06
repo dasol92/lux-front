@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import Post from '../../components/Post';
 
 async function getPost(id) {
-  const res = await fetch(`http://localhost:8080/api/posts/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${id}`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error('Failed to fetch post');
   }
