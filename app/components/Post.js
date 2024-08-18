@@ -121,7 +121,7 @@ export default function Post({ post: initialPost }) {
         </div>
       )}
 
-      {/* Comment form */}
+      {expanded ? (
       <div className="mt-4">
         <form onSubmit={handleCommentSubmit}>
           <RichTextEditor
@@ -133,6 +133,7 @@ export default function Post({ post: initialPost }) {
           </button>
         </form>
       </div>
+      ) : null}
     </div>
   )
 }
