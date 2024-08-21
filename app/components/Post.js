@@ -2,14 +2,16 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { formatDistanceToNow, format } from 'date-fns'
 import BookReference from './BookReference'
 import Comment from './Comment'
 import RichTextEditor from './RichTextEditor'
 
-export default function Post({ post: initialPost }) {
+export default function Post({ post: initialPost, isDetailView = false }) {
   const [post, setPost] = useState(initialPost)
   const [expanded, setExpanded] = useState(false)
+  const router = useRouter()
   const [commentContent, setCommentContent] = useState('')
   const maxLength = 100 // Maximum length for truncated content
 
@@ -27,6 +29,12 @@ export default function Post({ post: initialPost }) {
 
   const handleToggleExpand = () => {
     setExpanded(prevExpanded => !prevExpanded)
+  }
+
+  const handleContentClick = () => {
+    if (!isDetailView) {
+      router.push(`/posts/${post.id}`)
+    }
   }
 
   const handleCommentSubmit = async (e) => {
@@ -75,22 +83,22 @@ export default function Post({ post: initialPost }) {
         })()}
       </div>
       <div 
-        className={`content dark:text-gray-300 ${expanded ? 'expanded' : ''}`}
-        onClick={handleToggleExpand} // Toggle expanded state on click
+        className={`content dark:text-gray-300 ${expanded || isDetailView ? 'expanded' : ''}`}
+        onClick={handleContentClick} // Toggle expanded state on click
       >
-        {expanded ? (
+        {expanded || isDetailView ? (
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         ) : (
           <div dangerouslySetInnerHTML={{ __html: truncatedContent }} />
         )}
       </div>
-      {expanded && (
-        <div onClick={handleToggleExpand}> {/* Make BookReference clickable for toggle */}
+      {(expanded || isDetailView) && (
+        <div>
           <BookReference references={post.references} />
         </div>
       )}
       <div className="mt-4 flex justify-between items-center">
-        {!expanded && (
+        {(!expanded && !isDetailView) && (
           <button 
             onClick={(e) => {
               e.stopPropagation()
@@ -102,7 +110,7 @@ export default function Post({ post: initialPost }) {
           </button>
         )}
       </div>
-      {expanded ? (
+      {(expanded || isDetailView) ? (
         <div className="mt-4">
           <h4 className="text-lg font-semibold mb-2">댓글</h4>
           {post.comments.map(comment => (
@@ -121,7 +129,7 @@ export default function Post({ post: initialPost }) {
         </div>
       )}
 
-      {expanded ? (
+      {(expanded || isDetailView) ? (
       <div className="mt-4">
         <form onSubmit={handleCommentSubmit}>
           <RichTextEditor
