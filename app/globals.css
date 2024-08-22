@@ -55,7 +55,7 @@ body {
   }
 
   .comment-content {
-    @apply text-gray-700 dark:text-gray-300 leading-relaxed;
+    @apply text-gray-700 dark:text-gray-300;
   }
 
   /* Quill 에디터 컨텐츠 스타일 수정 */

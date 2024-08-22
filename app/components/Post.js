@@ -66,7 +66,7 @@ export default function Post({ post: initialPost, isDetailView = false }) {
   }
 
   return (
-    <div className="post bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-4">
+    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 mb-4">
       <h2 className="text-xl font-bold mb-2 dark:text-white">{post.title}</h2>
       <div className="flex items-center mb-2">
         <h3 className="text-base font-semibold mr-2 dark:text-gray-200">{post.authorName}</h3>
@@ -111,8 +111,8 @@ export default function Post({ post: initialPost, isDetailView = false }) {
         )}
       </div>
       {(expanded || isDetailView) ? (
-        <div className="mt-4">
-          <h4 className="text-lg font-semibold mb-2">댓글</h4>
+        <div className="mt-2">
+          {/* <h4 className="text-lg font-semibold mb-2"></h4> 댓글 */}
           {post.comments.map(comment => (
             <Comment key={comment.id} comment={comment} />
           ))}
@@ -123,7 +123,7 @@ export default function Post({ post: initialPost, isDetailView = false }) {
           {post.comments.length > 0 && (
             <>
               <h4 className="text-lg font-semibold mb-2">마지막 댓글</h4>
-              <Comment comment={post.comments[post.comments.length - 1]} />
+              <Comment onClick={handleContentClick} comment={post.comments[post.comments.length - 1]} />
             </>
           )}
         </div>
