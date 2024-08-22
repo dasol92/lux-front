@@ -2,7 +2,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { formatDistanceToNow, format } from 'date-fns'
 import BookReference from './BookReference'
 import Comment from './Comment'
@@ -40,15 +40,23 @@ export default function Post({ post: initialPost, isDetailView = false }) {
   const handleCommentSubmit = async (e) => {
     e.preventDefault()
 
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      router.push('/login');
+    }
+
     // Send the new comment to the backend
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/new/${post.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
       },
       body: JSON.stringify({
         content: commentContent,
-        authorEmail: 'yskim@naver.com', // Replace with actual author information
+        // authorEmail: 'yskim@naver.com', // HOW TO GET CURRENT USER'S EMAIL? just accesstoken?
       }),
     })
 
