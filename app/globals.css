@@ -1,3 +1,4 @@
+/* global.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,10 +33,10 @@ body {
   }
 }
 
-/* 댓글 스타일 */
+/* Updated comment styles */
 @layer components {
   .comment-container {
-    @apply bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-3 transition-shadow duration-300 ease-in-out;
+    @apply bg-white dark:bg-gray-800 border-l-2 rounded-r-lg p-3 mb-3 shadow-sm transition-all duration-300 ease-in-out;
   }
 
   .comment-container:hover {
@@ -43,58 +44,78 @@ body {
   }
 
   .comment-header {
-    @apply mb-1;
+    @apply flex items-center mb-3;
+  }
+
+  .comment-author-avatar {
+    @apply w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg mr-3;
+  }
+
+  .comment-info {
+    @apply flex flex-col;
   }
 
   .comment-author {
-    @apply font-bold text-gray-800 dark:text-gray-200 mr-2;
+    @apply font-semibold text-gray-800 dark:text-gray-200;
   }
 
   .comment-date {
-    @apply text-sm text-gray-600 dark:text-gray-400;
+    @apply text-xs text-gray-500 dark:text-gray-400 mt-1;
   }
 
   .comment-content {
-    @apply text-gray-700 dark:text-gray-300;
+    @apply text-gray-700 dark:text-gray-300 text-sm;
   }
 
-  /* Quill 에디터 컨텐츠 스타일 수정 */
-  .ql-editor {
+  /* Quill editor content styles */
+  /* .ql-editor {
     @apply p-0;
-  }
+  } */
 
   .ql-editor p {
     @apply mb-2;
   }
 
   .ql-editor h1 {
-    @apply text-2xl font-bold;
+    @apply text-xl font-bold mt-3;
   }
 
   .ql-editor h2 {
-    @apply text-xl font-bold;
+    @apply text-lg font-bold mt-2;
   }
 
   .ql-editor h3 {
-    @apply text-lg font-bold;
+    @apply text-base font-bold mt-2;
   }
 
   .ql-editor ul, .ql-editor ol {
-    @apply pl-2;
+    @apply pl-1 mt-2;
+  }
+
+  .ql-editor li {
+    @apply mb-1;
   }
 }
 
-/* 모바일 대응 */
-@media (max-width: 768px) {
+/* Mobile responsiveness */
+@media (max-width: 640px) {
   .comment-container {
-    @apply p-3;
+    @apply p-2;
   }
 
-  .comment-header {
-    @apply flex-col items-start;
+  .comment-author-avatar {
+    @apply w-8 h-8 text-sm;
+  }
+
+  .comment-info {
+    @apply text-sm;
   }
 
   .comment-date {
-    @apply text-xs mt-1;
+    @apply text-xs;
+  }
+
+  .comment-content {
+    @apply text-sm;
   }
 }

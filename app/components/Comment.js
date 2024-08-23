@@ -13,11 +13,16 @@ export default function Comment({ comment }) {
   return (
     <div className="comment-container">
       <div className="comment-header">
-        <span className="comment-author">{comment.authorName}</span>
-        <span className="comment-date">{formatCreatedAt(comment.createdAt)}</span>
+        <div className="comment-author-avatar">
+          {comment.authorName[0].toUpperCase()}
+        </div>
+        <div className="comment-info">
+          <span className="comment-author">{comment.authorName}</span>
+          <span className="comment-date">{formatCreatedAt(comment.createdAt)}</span>
+        </div>
       </div>
       <div 
-        className="comment-content ql-editor"
+        className="ql-editor"
         dangerouslySetInnerHTML={{ __html: sanitizedContent }} 
       />
     </div>
