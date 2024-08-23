@@ -45,6 +45,7 @@ export default function Post({ post: initialPost, isDetailView = false }) {
     if (!accessToken) {
       alert('로그인이 필요합니다.');
       router.push('/login');
+      return;
     }
 
     // Send the new comment to the backend
