@@ -23,11 +23,11 @@ export default function Header() {
               회원가입
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/settings" className="hover:underline">
               설정
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>
